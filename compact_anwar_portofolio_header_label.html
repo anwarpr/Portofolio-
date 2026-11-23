@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Anwar Prasetia — Full-Stack Web Developer & Founder of Warexchanger</title>
+
+  <!-- Google Fonts: Unbounded, Cormorant Garamond, Manrope, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Three.js for Interactive 3D Hero Stage -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              display3d: ['"Unbounded"', '"Manrope"', 'sans-serif'],
+              display: ['"Unbounded"', '"Manrope"', 'sans-serif'],
+              editorial: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+              sans: ['"Manrope"', 'sans-serif'],
+              mono: ['"IBM Plex Mono"', 'monospace'],
+            },
+            colors: {
+              obsidian: '#09090b',
+              surfaceDark: '#121215',
+              paper: '#f8fafc',
+              surfaceLight: '#ffffff',
+            }
+          }
+        }
+      };
+    }
+  </script>
+
+  <style>
+    /* Base typography & smooth scroll root defaults */
+    html {
+      scroll-behavior: auto; /* Controlled smoothly by Lenis */
+      background-color: #09090b;
+      color: #fafafa;
+    }
+
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      background-color: #09090b;
+      color: #fafafa;
+      transition: background-color 0.25s linear, color 0.25s linear;
+    }
+
+    /* Blinking block cursor for typewriter role effect */
+    @keyframes blinkBlock {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .typewriter-cursor {
+      display: inline-block;
+      width: 0.54em;
+      height: 0.96em;
+      background-color: currentColor;
+      vertical-align: -0.08em;
+      margin-left: 0.14em;
+      animation: blinkBlock 1s infinite;
+    }
+
+    /* Word-by-word illumination targets in About statement */
+    .illum-word {
+      display: inline-block;
+      color: #52525b;
+      transition: color 0.25s ease;
+    }
+
+    /* Infinite Seamless Tech Stack Marquee */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 34s linear infinite;
+    }
+    .marquee-wrapper:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    /* GitHub Heatmap Grid (52 columns x 7 rows) */
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(52, minmax(0, 1fr));
+      grid-template-rows: repeat(7, minmax(0, 1fr));
+      grid-auto-flow: column;
+      gap: 3px;
+    }
+
+    /* Fullscreen Drawer Transition (Editorial Charcoal Overlay) */
+    #nav-drawer {
+      background-color: #151518;
+      color: #f4f4f2;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s ease;
+    }
+    #nav-drawer.drawer-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    #nav-drawer.drawer-closed {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .drawer-serif-monogram {
+      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      font-style: italic;
+    }
+    .drawer-nav-item {
+      font-family: 'Unbounded', 'Manrope', sans-serif;
+      letter-spacing: -0.03em;
+    }
+    .drawer-index-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(113, 113, 122, 0.35);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(113, 113, 122, 0.6);
+    }
+
+    /* Tactile 3D Header, Cards & Hero Spatial Styling */
+    .perspective-stage {
+      perspective: 1400px;
+      transform-style: preserve-3d;
+    }
+
+    .hero-3d-display {
+      font-family: 'Unbounded', 'Manrope', sans-serif;
+      letter-spacing: -0.035em;
+      text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.14),
+        0 3px 0 rgba(24, 24, 27, 0.9),
+        0 16px 36px rgba(0, 0, 0, 0.88);
+    }
+
+    .header-3d-shell {
+      transform-style: preserve-3d;
+      box-shadow:
+        0 10px 30px -12px rgba(0, 0, 0, 0.72),
+        0 1px 0 0 rgba(255, 255, 255, 0.14) inset,
+        0 -2px 6px 0 rgba(0, 0, 0, 0.55) inset;
+    }
+
+    .nav-pill-3d {
+      transform: translateZ(0px);
+      box-shadow:
+        0 3px 0 0 rgba(0, 0, 0, 0.65),
+        0 1px 0 0 rgba(255, 255, 255, 0.12) inset;
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
+    }
+
+    .nav-pill-3d:hover {
+      transform: translateY(-2px) translateZ(14px);
+      box-shadow:
+        0 6px 14px -4px rgba(0, 0, 0, 0.75),
+        0 1px 0 0 rgba(255, 255, 255, 0.24) inset;
+    }
+
+    .nav-pill-3d:active {
+      transform: translateY(1px) translateZ(2px);
+      box-shadow:
+        0 1px 0 0 rgba(0, 0, 0, 0.7),
+        0 1px 0 0 rgba(255, 255, 255, 0.1) inset;
+    }
+
+    .cta-3d-primary {
+      transform: translateZ(0px);
+      box-shadow:
+        0 6px 0 0 #a1a1aa,
+        0 16px 32px -8px rgba(0, 0, 0, 0.8),
+        0 1px 0 0 rgba(255, 255, 255, 0.85) inset;
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, background-color 0.22s ease;
+    }
+
+    .cta-3d-primary:hover {
+      transform: translateY(-3px) translateZ(18px);
+      box-shadow:
+        0 9px 0 0 #a1a1aa,
+        0 22px 38px -8px rgba(0, 0, 0, 0.88),
+        0 1px 0 0 rgba(255, 255, 255, 0.95) inset;
+    }
+
+    .cta-3d-primary:active {
+      transform: translateY(3px) translateZ(4px);
+      box-shadow:
+        0 2px 0 0 #a1a1aa,
+        0 8px 16px -6px rgba(0, 0, 0, 0.75),
+        0 1px 0 0 rgba(255, 255, 255, 0.7) inset;
+    }
+
+    .cta-3d-secondary {
+      transform: translateZ(0px);
+      box-shadow:
+        0 5px 0 0 rgba(9, 9, 11, 0.92),
+        0 14px 28px -8px rgba(0, 0, 0, 0.75),
+        0 1px 0 0 rgba(255, 255, 255, 0.16) inset;
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
+    }
+
+    .cta-3d-secondary:hover {
+      transform: translateY(-2px) translateZ(14px);
+      box-shadow:
+        0 8px 0 0 rgba(9, 9, 11, 0.95),
+        0 20px 34px -8px rgba(0, 0, 0, 0.85),
+        0 1px 0 0 rgba(255, 255, 255, 0.28) inset;
+    }
+
+    .cta-3d-secondary:active {
+      transform: translateY(2px) translateZ(3px);
+      box-shadow:
+        0 2px 0 0 rgba(9, 9, 11, 0.92),
+        0 6px 14px -6px rgba(0, 0, 0, 0.7) inset;
+    }
+
+    .social-badge-3d {
+      transform: translateZ(0px);
+      box-shadow:
+        0 4px 0 0 rgba(0, 0, 0, 0.7),
+        0 8px 18px -6px rgba(0, 0, 0, 0.65),
+        0 1px 0 0 rgba(255, 255, 255, 0.14) inset;
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.22s ease, color 0.22s ease, background-color 0.22s ease;
+    }
+
+    .social-badge-3d:hover {
+      transform: translateY(-2px) translateZ(12px);
+      box-shadow:
+        0 7px 0 0 rgba(0, 0, 0, 0.75),
+        0 14px 24px -6px rgba(0, 0, 0, 0.8),
+        0 1px 0 0 rgba(255, 255, 255, 0.24) inset;
+    }
+
+    .tilt-card-3d {
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    /* Fallback 3D perspective depth grid when WebGL is unavailable */
+    .fallback-3d-grid {
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 56px 56px;
+      transform: perspective(900px) rotateX(62deg) translateY(14%) scale(1.45);
+      transform-origin: center center;
+    }
+
+    #hero-tilt-block {
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-zinc-200 selection:text-zinc-950">
+
+  <!-- =========================================================
+       FULL-SCREEN EDITORIAL OVERLAY MENU DRAWER (01 - 06)
+  ========================================================== -->
+  <div id="nav-drawer" class="drawer-closed fixed inset-0 z-50 bg-[#151518] text-[#f4f4f2] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Full-Screen Navigation Menu">
+    <div class="min-h-full w-full flex flex-col justify-between gap-10 pb-8 sm:pb-10">
+      <!-- Top Drawer Header Bar: Matched to Floating Header Geometry & Alignment -->
+      <div class="sticky top-0 z-10 w-full bg-[#151518]/90 backdrop-blur-md pt-4 sm:pt-6">
+        <div class="max-w-6xl w-[calc(100%-2.5rem)] sm:w-[calc(100%-5rem)] mx-auto rounded-full bg-[#1b1b20]/90 border border-white/[0.12] px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2.5 sm:gap-4">
+          <a href="#hero" data-drawer-target="#hero" aria-label="Muhammad Anwar Prasetia Home" class="inline-flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] tracking-[0.06em] sm:tracking-[0.1em] uppercase text-[#f4f4f2] hover:text-white transition-colors min-w-0 shrink">
+            <span class="drawer-serif-monogram inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.08] border border-white/[0.12] text-base sm:text-lg font-semibold leading-none select-none shrink-0">
+              A
+            </span>
+            <span class="whitespace-nowrap leading-none">Anwar / Portofolio</span>
+          </a>
+
+          <button id="close-menu-btn" type="button" aria-label="Close Navigation Menu" class="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-[#e8e7e3] hover:bg-white text-[#151518] font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] sm:tracking-[0.18em] leading-none transition-colors shrink-0">
+            <span class="leading-none">CLOSE</span>
+            <span aria-hidden="true" class="text-xs leading-none">×</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Navigation List: Clean Aligned Uppercase Left + Right-Aligned Tabular Index (01 - 06) -->
+      <nav aria-label="Full-Screen Numbered Navigation" class="max-w-4xl w-full mx-auto px-6 sm:px-10 my-auto">
+        <ul class="flex flex-col divide-y divide-white/[0.06]">
+          <li>
+            <a href="#hero" data-drawer-target="#hero" class="drawer-nav-item group flex items-baseline justify-between gap-6 py-3.5 sm:py-4 text-[#f2f2f0] hover:text-white transition-colors">
+              <span class="font-semibold uppercase text-2xl sm:text-4xl md:text-5xl leading-[1.08] group-hover:translate-x-1.5 transition-transform duration-200">HOME</span>
+              <span class="drawer-index-num text-xs sm:text-sm tracking-widest text-[#a1a1aa] group-hover:text-white transition-colors">01</span>
+            </a>
+          </li>
+          <li>
+            <a href="#about" data-drawer-target="#about" class="drawer-nav-item group flex items-baseline justify-between gap-6 py-3.5 sm:py-4 text-[#f2f2f0] hover:text-white transition-colors">
+              <span class="font-semibold uppercase text-2xl sm:text-4xl md:text-5xl leading-[1.08] group-hover:translate-x-1.5 transition-transform duration-200">ABOUT</span>
+              <span class="drawer-index-num text-xs sm:text-sm tracking-widest text-[#a1a1aa] group-hover:text-white transition-colors">02</span>
+            </a>
+          </li>
+          <li>
+            <a href="#experiences" data-drawer-target="#experiences" class="drawer-nav-item group flex items-baseline justify-between gap-6 py-3.5 sm:py-4 text-[#f2f2f0] hover:text-white transition-colors">
+              <span class="font-semibold uppercase text-2xl sm:text-4xl md:text-5xl leading-[1.08] group-hover:translate-x-1.5 transition-transform duration-200">EXPERIENCE</span>
+              <span class="drawer-index-num text-xs sm:text-sm tracking-widest text-[#a1a1aa] group-hover:text-white transition-colors">03</span>
+            </a>
+          </li>
+          <li>
+            <a href="#projects" data-drawer-target="#projects" class="drawer-nav-item group flex items-baseline justify-between gap-6 py-3.5 sm:py-4 text-[#f2f2f0] hover:text-white transition-colors">
+              <span class="font-semibold uppercase text-2xl sm:text-4xl md:text-5xl leading-[1.08] group-hover:translate-x-1.5 transition-transform duration-200">PROJECTS</span>
+              <span class="drawer-index-num text-xs sm:text-sm tracking-widest text-[#a1a1aa] group-hover:text-white transition-colors">04</span>
+            </a>
+          </li>
+          <li>
+            <a href="#certificates" data-drawer-target="#certificates" class="drawer-nav-item group flex items-baseline justify-between gap-6 py-3.5 sm:py-4 text-[#f2f2f0] hover:text-white transition-colors">
+              <span class="font-semibold uppercase text-2xl sm:text-4xl md:text-5xl leading-[1.08] group-hover:translate-x-1.5 transition-transform duration-200">ALL PROJECTS</span>
+              <span class="drawer-index-num text-xs sm:text-sm tracking-widest text-[#a1a1aa] group-hover:text-white transition-colors">05</span>
+            </a>
+          </li>
+          <li>
+            <a href="#contact" data-drawer-target="#contact" class="drawer-nav-item group flex items-baseline justify-between gap-6 py-3.5 sm:py-4 text-[#f2f2f0] hover:text-white transition-colors">
+              <span class="font-semibold uppercase text-2xl sm:text-4xl md:text-5xl leading-[1.08] group-hover:translate-x-1.5 transition-transform duration-200">CONTACT</span>
+              <span class="drawer-index-num text-xs sm:text-sm tracking-widest text-[#a1a1aa] group-hover:text-white transition-colors">06</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Bottom SOCIALS Section & Live WIB Clock -->
+      <div class="max-w-4xl w-full mx-auto px-6 sm:px-10 pt-5 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div class="space-y-2.5">
+          <div class="font-mono text-[11px] uppercase tracking-[0.22em] text-[#a1a1aa]">
+            SOCIALS
+          </div>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs sm:text-sm uppercase tracking-[0.14em] text-[#e8e7e3]">
+            <button id="drawer-resume-btn" type="button" class="hover:text-white transition-colors uppercase tracking-[0.14em]">
+              RESUME
+            </button>
+            <a href="https://github.com/anwarpr" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+              GITHUB
+            </a>
+            <a href="https://www.linkedin.com/in/anwarpr" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+              LINKEDIN
+            </a>
+            <a href="https://instagram.com/anwarpr" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+              INSTAGRAM
+            </a>
+            <a href="mailto:anwarpr.jobs@gmail.com" class="hover:text-white transition-colors">
+              EMAIL
+            </a>
+          </div>
+        </div>
+
+        <div class="font-mono text-xs text-[#a1a1aa] drawer-wib-clock shrink-0">
+          --:--:-- WIB
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MAIN SCROLL CONTAINER
+  ========================================================== -->
+  <main id="smooth-content">
+    <!-- Floating 3D Top Navigation Bar -->
+    <header id="header-3d-bar" class="header-3d-shell fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-40 max-w-6xl w-[calc(100%-2.5rem)] sm:w-[calc(100%-5rem)] rounded-full bg-[#111115]/80 text-zinc-100 border border-white/[0.14] backdrop-blur-md px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2.5 sm:gap-4 transition-colors duration-300">
+      <a href="#hero" id="header-brand-3d" class="inline-flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] tracking-[0.06em] sm:tracking-[0.1em] uppercase text-current min-w-0 shrink">
+        <span class="drawer-serif-monogram inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/[0.08] border border-white/[0.12] text-base sm:text-lg font-semibold shrink-0">A</span>
+        <span class="whitespace-nowrap leading-none">Anwar / Portofolio</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em]">
+        <a href="#about" class="nav-pill-3d px-3.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.12] border border-white/[0.1]">About</a>
+        <a href="#experiences" class="nav-pill-3d px-3.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.12] border border-white/[0.1]">Experience</a>
+        <a href="#projects" class="nav-pill-3d px-3.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.12] border border-white/[0.1]">Projects</a>
+        <a href="#certificates" class="nav-pill-3d px-3.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.12] border border-white/[0.1]">Credentials</a>
+        <a href="#contact" class="nav-pill-3d px-3.5 py-1.5 rounded-full bg-white/[0.05] hover:bg-white/[0.12] border border-white/[0.1]">Contact</a>
+      </div>
+
+      <button id="open-menu-btn" type="button" aria-label="Open Navigation Menu" class="nav-pill-3d inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/[0.16] font-mono text-[11px] font-medium uppercase tracking-[0.18em] shrink-0">
+        <span>MENU</span>
+        <span aria-hidden="true">☰</span>
+      </button>
+    </header>
+
+    <!-- =======================================================
+         1. HERO SECTION (FULL-3D INTERACTIVE SPATIAL HEADER)
+    ======================================================== -->
+    <section id="hero" data-theme="dark" data-bg="#09090b" data-fg="#fafafa" class="theme-section perspective-stage relative min-h-screen pt-28 sm:pt-36 pb-20 flex flex-col justify-between overflow-hidden">
+      <!-- Interactive Three.js 3D Spatial Stage Layer -->
+      <div id="hero-3d-stage" class="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+        <canvas id="hero-webgl-canvas" class="w-full h-full block opacity-90"></canvas>
+        <!-- Graceful CSS 3D Depth Grid Fallback (Shown automatically if WebGL is unavailable) -->
+        <div id="hero-3d-fallback" class="hidden absolute inset-0 flex items-center justify-center opacity-45">
+          <div class="fallback-3d-grid w-full h-full"></div>
+        </div>
+        <!-- Subtle Radial Depth Vignette for Crisp Foreground Legibility -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(9,9,11,0.18)_0%,rgba(9,9,11,0.88)_100%)]"></div>
+      </div>
+
+      <div class="relative z-10 max-w-6xl w-full mx-auto px-5 sm:px-10 my-auto">
+        <!-- Interactive 3D Perspective Tilt Header Block -->
+        <div id="hero-tilt-block" class="space-y-7 sm:space-y-9 rounded-3xl p-5 sm:p-8 md:p-10 bg-gradient-to-br from-white/[0.045] via-[#111116]/55 to-[#09090b]/75 border border-white/[0.12] backdrop-blur-md shadow-[0_28px_70px_-20px_rgba(0,0,0,0.92),0_1px_0_0_rgba(255,255,255,0.14)_inset]">
+          <!-- Top Status Tag -->
+          <div class="hero-stagger inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.14] font-mono text-xs text-zinc-300" style="transform: translateZ(24px);">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>YOGYAKARTA, INDONESIA · AVAILABLE FOR OPPORTUNITIES</span>
+          </div>
+
+          <!-- Primary Name & Dynamic Typewriter Role -->
+          <div class="space-y-4" style="transform: translateZ(42px);">
+            <p class="hero-stagger font-mono text-xs sm:text-sm uppercase tracking-[0.22em] text-zinc-400">
+              MUHAMMAD ANWAR PRASETIA
+            </p>
+
+            <h1 class="hero-stagger hero-3d-display font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.06] text-[#fafafa]">
+              Muhammad Anwar Prasetia
+            </h1>
+
+            <div class="hero-stagger font-display font-semibold text-xl sm:text-3xl md:text-[2.35rem] tracking-[-0.025em] text-zinc-400 min-h-[1.35em]">
+              <span id="typewriter-text" class="text-zinc-200"></span><span class="typewriter-cursor" aria-hidden="true"></span>
+            </div>
+          </div>
+
+          <!-- Concise Intro Mentioning S.Si. in Medical Physics at Sunan Kalijaga State Islamic University of Yogyakarta -->
+          <p class="hero-stagger max-w-2xl text-base sm:text-lg leading-relaxed text-zinc-300/90 font-normal" style="transform: translateZ(28px);">
+            Full-Stack Web Developer with an <span class="text-white font-medium">S.Si. in Medical Physics</span> from <span class="text-white font-medium">Sunan Kalijaga State Islamic University of Yogyakarta</span> and Founder of <span class="text-white font-medium">Warexchanger</span> (since 2018), building fast, reliable web applications and digital exchange workflows.
+          </p>
+
+          <!-- 3D-Extruded Primary/Secondary CTA Buttons (Resume & Contact) -->
+          <div class="hero-stagger flex flex-wrap items-center gap-3.5 pt-1" style="transform: translateZ(36px);">
+            <button id="open-resume-btn" type="button" class="cta-3d-primary inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-[#fafafa] text-[#09090b] hover:bg-zinc-200 font-mono text-xs sm:text-sm font-semibold">
+              <span>Resume</span>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M7 7h10v10" />
+              </svg>
+            </button>
+
+            <a href="#contact" class="cta-3d-secondary inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.16] text-[#fafafa] font-mono text-xs sm:text-sm font-medium">
+              <span>Contact</span>
+            </a>
+          </div>
+
+          <!-- Tactile 3D Social & Contact Links Row (LinkedIn, GitHub, Instagram, Gmail) -->
+          <div class="hero-stagger pt-4 border-t border-white/[0.1] flex flex-wrap items-center gap-3 font-mono text-xs text-zinc-300" style="transform: translateZ(20px);">
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/anwarpr" target="_blank" rel="noopener noreferrer" class="social-badge-3d inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.12] hover:border-white/30 text-zinc-300 hover:text-white">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/anwarpr" target="_blank" rel="noopener noreferrer" class="social-badge-3d inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.12] hover:border-white/30 text-zinc-300 hover:text-white">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+              </svg>
+              <span>GitHub</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/anwarpr" target="_blank" rel="noopener noreferrer" class="social-badge-3d inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.12] hover:border-white/30 text-zinc-300 hover:text-white">
+              <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+              <span>Instagram</span>
+            </a>
+
+            <!-- Gmail -->
+            <a href="mailto:anwarpr.jobs@gmail.com" class="social-badge-3d inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.1] border border-white/[0.12] hover:border-white/30 text-zinc-300 hover:text-white">
+              <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <span>anwarpr.jobs@gmail.com</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtle Scroll Indicator & Real-Time WIB Clock -->
+      <div class="relative z-10 max-w-6xl w-full mx-auto px-5 sm:px-10 pt-8 flex items-center justify-between font-mono text-[11px] text-zinc-500">
+        <span>SCROLL TO EXPLORE · MOVE CURSOR FOR 3D DEPTH</span>
+        <span class="hero-wib-clock text-zinc-400">--:--:-- WIB</span>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         2. ABOUT & WORD-BY-WORD ILLUMINATION + TECH STACK MARQUEE
+    ======================================================== -->
+    <section id="about" data-theme="dark" data-bg="#09090b" data-fg="#fafafa" class="theme-section py-24 sm:py-32 border-t border-white/[0.06]">
+      <div class="max-w-6xl mx-auto px-5 sm:px-10 space-y-16">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500">
+          01 // ABOUT <span class="text-zinc-700 mx-1">/</span> Philosophy, Science & Warexchanger
+        </div>
+
+        <!-- Word-by-word Scroll Illumination Statement -->
+        <h2 id="about-illumination-statement" class="font-display font-semibold text-2xl sm:text-4xl md:text-[2.65rem] leading-[1.24] tracking-[-0.025em] max-w-5xl">
+          I craft dependable full-stack web systems and seamless digital balance and cryptocurrency exchange workflows with analytical rigor.
+        </h2>
+
+        <!-- Two-column Supporting Details (Clean Narrative Without Currency Sub-Blocks) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 text-sm sm:text-base text-zinc-400 leading-relaxed">
+          <p>
+            Holding an <span class="text-zinc-200 font-medium">S.Si. in Medical Physics</span> from <span class="text-zinc-200 font-medium">Sunan Kalijaga State Islamic University of Yogyakarta (UIN Sunan Kalijaga Yogyakarta)</span>, I combine quantitative analysis, structured data workflows, and full-stack web engineering to build fast, accurate, and maintainable digital applications.
+          </p>
+          <p>
+            As <span class="text-zinc-200 font-medium">Founder of Warexchanger</span> (established in <span class="text-zinc-200 font-medium">2018</span>), I build and operate digital balance and cryptocurrency exchange solutions focused on clear transaction flows, responsiveness, and user trust.
+          </p>
+        </div>
+
+        <!-- Infinite Seamless Tech Stack Marquee (with Bitcoin ₿, Dollar $, Rupiah Rp) -->
+        <div id="tech-stack" class="pt-6 space-y-4">
+          <div class="font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500">
+            CORE TECHNOLOGIES, EXCHANGE ASSETS & WORKFLOWS
+          </div>
+          <div class="marquee-wrapper overflow-hidden py-3 border-y border-white/[0.07]">
+            <div class="marquee-track flex items-center gap-4">
+              <!-- Set 1 -->
+              <div class="flex items-center gap-4 shrink-0">
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">TypeScript</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">JavaScript (ES2024+)</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">React & Next.js</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">Tailwind CSS</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">Node.js</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">SQL & Databases</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">Python</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">AWS Cloud & Gen AI</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">Git & GitHub</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">GSAP & Lenis</span>
+                <!-- Bitcoin (₿) Icon Pill -->
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-400/25 font-mono text-xs text-amber-300">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M9 4v16M13 3v2M13 19v2M7 7h7.5a3 3 0 0 1 0 6H7m0 0h8.5a3.5 3.5 0 0 1 0 7H7" />
+                  </svg>
+                  <span>Bitcoin (₿)</span>
+                </span>
+                <!-- Dollar ($) Icon Pill -->
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-400/25 font-mono text-xs text-emerald-300">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                  <span>Dollar ($)</span>
+                </span>
+                <!-- Rupiah (Rp) Icon Pill -->
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-400/25 font-mono text-xs text-sky-300">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M4 6h5.5a3 3 0 0 1 0 6H4V6zm0 6h6l3 6M15 10h5M17.5 7.5v5" />
+                  </svg>
+                  <span>Rupiah (Rp)</span>
+                </span>
+              </div>
+
+              <!-- Set 2 (Duplicate for Seamless Loop) -->
+              <div class="flex items-center gap-4 shrink-0" aria-hidden="true">
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">TypeScript</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">JavaScript (ES2024+)</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">React & Next.js</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">Tailwind CSS</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">Node.js</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">SQL & Databases</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">Python</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">AWS Cloud & Gen AI</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">Git & GitHub</span>
+                <span class="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-zinc-300">GSAP & Lenis</span>
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-400/25 font-mono text-xs text-amber-300">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 4v16M13 3v2M13 19v2M7 7h7.5a3 3 0 0 1 0 6H7m0 0h8.5a3.5 3.5 0 0 1 0 7H7" />
+                  </svg>
+                  <span>Bitcoin (₿)</span>
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-400/25 font-mono text-xs text-emerald-300">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                  <span>Dollar ($)</span>
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-400/25 font-mono text-xs text-sky-300">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h5.5a3 3 0 0 1 0 6H4V6zm0 6h6l3 6M15 10h5M17.5 7.5v5" />
+                  </svg>
+                  <span>Rupiah (Rp)</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         3. EXPERIENCES & EDUCATION CAROUSEL (SWIPER)
+    ======================================================== -->
+    <section id="experiences" data-theme="light" data-bg="#f8fafc" data-fg="#09090b" class="theme-section py-24 sm:py-32 border-t border-zinc-200/80">
+      <div class="max-w-6xl mx-auto px-5 sm:px-10 space-y-12">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div class="space-y-2">
+            <div class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500">
+              02 // EXPERIENCE & EDUCATION
+            </div>
+            <h2 class="font-display font-bold text-2xl sm:text-4xl md:text-5xl tracking-[-0.03em] text-zinc-950">
+              Leadership, Engineering & Academic Roots
+            </h2>
+          </div>
+
+          <!-- Swiper Custom Navigation Controls -->
+          <div class="flex items-center gap-2.5">
+            <button id="exp-prev-btn" type="button" aria-label="Previous Experience" class="w-10 h-10 rounded-full border border-zinc-300 hover:border-zinc-950 flex items-center justify-center text-zinc-800 hover:bg-zinc-950 hover:text-white transition-all">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button id="exp-next-btn" type="button" aria-label="Next Experience" class="w-10 h-10 rounded-full border border-zinc-300 hover:border-zinc-950 flex items-center justify-center text-zinc-800 hover:bg-zinc-950 hover:text-white transition-all">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Swiper Container -->
+        <div class="swiper experience-swiper">
+          <div class="swiper-wrapper">
+            <!-- Slide 1: Founder of Warexchanger (Est. 2018) -->
+            <div class="swiper-slide h-auto">
+              <article class="tilt-card-3d h-full rounded-2xl bg-white border border-zinc-200/90 p-6 sm:p-8 flex flex-col justify-between gap-6 shadow-sm">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between gap-2 font-mono text-xs text-zinc-500">
+                    <span>2018 — PRESENT</span>
+                    <span class="px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-800 font-medium">FOUNDER</span>
+                  </div>
+                  <h3 class="font-display font-bold text-xl text-zinc-950">
+                    Founder — Warexchanger
+                  </h3>
+                  <p class="text-sm text-zinc-600 leading-relaxed">
+                    Founded and built <span class="font-semibold text-zinc-900">Warexchanger</span> in <span class="font-semibold text-zinc-900">2018</span> to simplify digital balance and cryptocurrency exchange transactions with responsive service, transparent rates, and dependable fulfillment.
+                  </p>
+                </div>
+
+                <!-- Bitcoin (₿), Dollar ($), Rupiah (Rp) Icons Row -->
+                <div class="pt-4 border-t border-zinc-100 flex flex-wrap items-center gap-2 font-mono text-xs">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-medium">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M9 4v16M13 3v2M13 19v2M7 7h7.5a3 3 0 0 1 0 6H7m0 0h8.5a3.5 3.5 0 0 1 0 7H7" />
+                    </svg>
+                    <span>Bitcoin (₿)</span>
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-medium">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                    <span>Dollar ($)</span>
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-50 text-sky-800 border border-sky-200 font-medium">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M4 6h5.5a3 3 0 0 1 0 6H4V6zm0 6h6l3 6M15 10h5M17.5 7.5v5" />
+                    </svg>
+                    <span>Rupiah (Rp)</span>
+                  </span>
+                </div>
+              </article>
+            </div>
+
+            <!-- Slide 2: Education — S.Si. in Medical Physics -->
+            <div class="swiper-slide h-auto">
+              <article class="tilt-card-3d h-full rounded-2xl bg-white border border-zinc-200/90 p-6 sm:p-8 flex flex-col justify-between gap-6 shadow-sm">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between gap-2 font-mono text-xs text-zinc-500">
+                    <span>EDUCATION</span>
+                    <span class="px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-800 font-medium">S.Si. DEGREE</span>
+                  </div>
+                  <h3 class="font-display font-bold text-xl text-zinc-950">
+                    S.Si. in Medical Physics
+                  </h3>
+                  <p class="font-mono text-xs font-medium text-zinc-700">
+                    Sunan Kalijaga State Islamic University of Yogyakarta (UIN Sunan Kalijaga Yogyakarta)
+                  </p>
+                  <p class="text-sm text-zinc-600 leading-relaxed">
+                    Built a rigorous foundation in quantitative modeling, analytical troubleshooting, data interpretation, and scientific communication—complemented by <span class="font-semibold text-zinc-900">Juara 3 PHOTON</span> at Fisika Festival 2023.
+                  </p>
+                </div>
+
+                <div class="pt-4 border-t border-zinc-100 flex flex-wrap gap-2 font-mono text-[11px] text-zinc-600">
+                  <span class="px-2.5 py-1 rounded-md bg-zinc-100">Quantitative Analysis</span>
+                  <span class="px-2.5 py-1 rounded-md bg-zinc-100">System Modeling</span>
+                  <span class="px-2.5 py-1 rounded-md bg-zinc-100">Juara 3 PHOTON</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- Slide 3: Full-Stack Web & Software Engineering -->
+            <div class="swiper-slide h-auto">
+              <article class="tilt-card-3d h-full rounded-2xl bg-white border border-zinc-200/90 p-6 sm:p-8 flex flex-col justify-between gap-6 shadow-sm">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between gap-2 font-mono text-xs text-zinc-500">
+                    <span>ENGINEERING</span>
+                    <span class="px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-800 font-medium">FULL-STACK</span>
+                  </div>
+                  <h3 class="font-display font-bold text-xl text-zinc-950">
+                    Full-Stack Web & Data Workflows
+                  </h3>
+                  <p class="text-sm text-zinc-600 leading-relaxed">
+                    Developing modern web interfaces, structured SQL databases, Python & JavaScript utilities, and cloud-ready workflows backed by 9 Dicoding Indonesia credentials and C1 Advanced English proficiency.
+                  </p>
+                </div>
+
+                <div class="pt-4 border-t border-zinc-100 flex flex-wrap gap-2 font-mono text-[11px] text-zinc-600">
+                  <span class="px-2.5 py-1 rounded-md bg-zinc-100">TypeScript / JS</span>
+                  <span class="px-2.5 py-1 rounded-md bg-zinc-100">SQL & Data Science</span>
+                  <span class="px-2.5 py-1 rounded-md bg-zinc-100">EF SET C1</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         4. SELECTED PROJECTS CAROUSEL (SWIPER + DETAIL MODAL)
+    ======================================================== -->
+    <section id="projects" data-theme="dark" data-bg="#09090b" data-fg="#fafafa" class="theme-section py-24 sm:py-32 border-t border-white/[0.06]">
+      <div class="max-w-6xl mx-auto px-5 sm:px-10 space-y-12">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div class="space-y-2">
+            <div class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500">
+              03 // SELECTED PROJECTS
+            </div>
+            <h2 class="font-display font-bold text-2xl sm:text-4xl md:text-5xl tracking-[-0.03em] text-[#fafafa]">
+              Platforms & Engineering Work
+            </h2>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <button id="proj-prev-btn" type="button" aria-label="Previous Project" class="w-10 h-10 rounded-full border border-white/15 hover:border-white flex items-center justify-center text-zinc-200 hover:bg-white hover:text-zinc-950 transition-all">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button id="proj-next-btn" type="button" aria-label="Next Project" class="w-10 h-10 rounded-full border border-white/15 hover:border-white flex items-center justify-center text-zinc-200 hover:bg-white hover:text-zinc-950 transition-all">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="swiper projects-swiper">
+          <div class="swiper-wrapper">
+            <!-- Project 1: Warexchanger -->
+            <div class="swiper-slide h-auto">
+              <article class="tilt-card-3d h-full rounded-2xl bg-white/[0.03] border border-white/[0.09] hover:border-white/25 p-6 sm:p-8 flex flex-col justify-between gap-6 transition-all">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between font-mono text-xs text-zinc-400">
+                    <span>01 / FOUNDED 2018</span>
+                    <span class="text-emerald-400">ACTIVE VENTURE</span>
+                  </div>
+                  <h3 class="font-display font-bold text-xl text-white">
+                    Warexchanger — Digital Balance & Crypto Exchange
+                  </h3>
+                  <p class="text-sm text-zinc-400 leading-relaxed">
+                    Digital balance and cryptocurrency exchange operation founded by Muhammad Anwar Prasetia in 2018, supporting streamlined conversion flows across crypto and fiat balances.
+                  </p>
+
+                  <!-- Bitcoin (₿), Dollar ($), Rupiah (Rp) Icons -->
+                  <div class="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/10 text-amber-300 border border-amber-400/25">
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M9 4v16M13 3v2M13 19v2M7 7h7.5a3 3 0 0 1 0 6H7m0 0h8.5a3.5 3.5 0 0 1 0 7H7" />
+                      </svg>
+                      <span>Bitcoin (₿)</span>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-400/25">
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                      </svg>
+                      <span>Dollar ($)</span>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-500/10 text-sky-300 border border-sky-400/25">
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M4 6h5.5a3 3 0 0 1 0 6H4V6zm0 6h6l3 6M15 10h5M17.5 7.5v5" />
+                      </svg>
+                      <span>Rupiah (Rp)</span>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
+                  <span class="font-mono text-xs text-zinc-500">Founder · Since 2018</span>
+                  <button type="button" onclick="openProjectModal('warexchanger')" class="font-mono text-xs text-white hover:underline underline-offset-4">
+                    Case Overview →
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <!-- Project 2: Medical Physics Quantitative & Data Toolkit -->
+            <div class="swiper-slide h-auto">
+              <article class="tilt-card-3d h-full rounded-2xl bg-white/[0.03] border border-white/[0.09] hover:border-white/25 p-6 sm:p-8 flex flex-col justify-between gap-6 transition-all">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between font-mono text-xs text-zinc-400">
+                    <span>02 / ANALYTICS & DATA</span>
+                    <span>PYTHON · SQL</span>
+                  </div>
+                  <h3 class="font-display font-bold text-xl text-white">
+                    Structured Data & Quantitative Analysis Pipelines
+                  </h3>
+                  <p class="text-sm text-zinc-400 leading-relaxed">
+                    Analytical scripts and SQL query workflows built on an S.Si. in Medical Physics foundation from Sunan Kalijaga State Islamic University of Yogyakarta for clean data validation and reporting.
+                  </p>
+                </div>
+
+                <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
+                  <span class="font-mono text-xs text-zinc-500">Data & SQL</span>
+                  <button type="button" onclick="openProjectModal('analytics')" class="font-mono text-xs text-white hover:underline underline-offset-4">
+                    Case Overview →
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <!-- Project 3: Interactive Editorial Portfolio Architecture -->
+            <div class="swiper-slide h-auto">
+              <article class="tilt-card-3d h-full rounded-2xl bg-white/[0.03] border border-white/[0.09] hover:border-white/25 p-6 sm:p-8 flex flex-col justify-between gap-6 transition-all">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between font-mono text-xs text-zinc-400">
+                    <span>03 / WEB ENGINEERING</span>
+                    <span>GSAP · LENIS · THREE.JS</span>
+                  </div>
+                  <h3 class="font-display font-bold text-xl text-white">
+                    Scroll-Reactive Web & Spatial Interfaces
+                  </h3>
+                  <p class="text-sm text-zinc-400 leading-relaxed">
+                    Responsive single-page architecture featuring smooth inertial scrolling, scroll-driven light/dark polarity shifts, Three.js spatial depth, and interactive credential filtering.
+                  </p>
+                </div>
+
+                <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between">
+                  <span class="font-mono text-xs text-zinc-500">Front-End & UI</span>
+                  <button type="button" onclick="openProjectModal('editorial')" class="font-mono text-xs text-white hover:underline underline-offset-4">
+                    Case Overview →
+                  </button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         5. CERTIFICATES & AWARDS SECTION (#certificates)
+         Light Polarity (#f8fafc) with Category Filter Tabs
+    ======================================================== -->
+    <section id="certificates" data-theme="light" data-bg="#f8fafc" data-fg="#09090b" class="theme-section py-24 sm:py-32 border-t border-zinc-200/80">
+      <div class="max-w-6xl mx-auto px-5 sm:px-10 space-y-12">
+        <!-- Section Header -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div class="space-y-2">
+            <div class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500">
+              05 // CERTIFICATES & AWARDS
+            </div>
+            <h2 class="font-display font-bold text-2xl sm:text-4xl md:text-5xl tracking-[-0.03em] text-zinc-950">
+              Verified Credentials & Recognition
+            </h2>
+            <p class="text-sm sm:text-base text-zinc-600 max-w-2xl">
+              10 verified certificates across English proficiency (EF SET C1 Advanced), web development, programming, cloud/Gen AI, and SQL/data science on Dicoding Indonesia, alongside national competition recognition.
+            </p>
+          </div>
+
+          <div class="font-mono text-xs text-zinc-500 shrink-0">
+            Showing <span id="cert-visible-count" class="font-semibold text-zinc-900">11</span> of <span id="cert-total-count" class="font-semibold text-zinc-900">11</span> items (10 Certificates + 1 Award)
+          </div>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div id="cert-filter-bar" role="tablist" aria-label="Filter Certificates and Awards" class="flex flex-wrap items-center gap-2.5">
+          <button type="button" data-filter="All" class="cert-filter-btn active px-4 py-2 rounded-full bg-zinc-950 text-white font-mono text-xs font-semibold transition-all">
+            All <span id="count-all" class="opacity-75">(11)</span>
+          </button>
+          <button type="button" data-filter="English & Awards" class="cert-filter-btn px-4 py-2 rounded-full bg-white border border-zinc-200 hover:border-zinc-400 text-zinc-700 font-mono text-xs transition-all">
+            English & Awards <span id="count-english-awards" class="text-zinc-400">(2)</span>
+          </button>
+          <button type="button" data-filter="Web & Frontend" class="cert-filter-btn px-4 py-2 rounded-full bg-white border border-zinc-200 hover:border-zinc-400 text-zinc-700 font-mono text-xs transition-all">
+            Web & Frontend <span id="count-web-frontend" class="text-zinc-400">(2)</span>
+          </button>
+          <button type="button" data-filter="Programming & Cloud" class="cert-filter-btn px-4 py-2 rounded-full bg-white border border-zinc-200 hover:border-zinc-400 text-zinc-700 font-mono text-xs transition-all">
+            Programming & Cloud <span id="count-programming-cloud" class="text-zinc-400">(5)</span>
+          </button>
+          <button type="button" data-filter="Data & SQL" class="cert-filter-btn px-4 py-2 rounded-full bg-white border border-zinc-200 hover:border-zinc-400 text-zinc-700 font-mono text-xs transition-all">
+            Data & SQL <span id="count-data-sql" class="text-zinc-400">(2)</span>
+          </button>
+        </div>
+
+        <!-- Credentials Grid (Populated via JS; Award Card Has No Thumbnail/Lightbox Label) -->
+        <div id="certificates-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         6. GITHUB ACTIVITY & 52-WEEK CONTRIBUTION HEATMAP
+    ======================================================== -->
+    <section id="github-activity" data-theme="dark" data-bg="#09090b" data-fg="#fafafa" class="theme-section py-24 sm:py-32 border-t border-white/[0.06]">
+      <div class="max-w-6xl mx-auto px-5 sm:px-10 space-y-10">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div class="space-y-2">
+            <div class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500">
+              06 // OPEN-SOURCE & COMMIT RHYTHM
+            </div>
+            <h2 class="font-display font-bold text-2xl sm:text-4xl tracking-[-0.03em] text-white">
+              52-Week Contribution Activity
+            </h2>
+          </div>
+          <a href="https://github.com/anwarpr" target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-zinc-300 hover:text-white underline underline-offset-4">
+            github.com/anwarpr →
+          </a>
+        </div>
+
+        <!-- Summary Metrics -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">ANNUAL CONTRIBUTIONS</div>
+            <div id="heatmap-total-commits" class="mt-1 font-display font-bold text-2xl sm:text-3xl text-white">
+              — <span class="font-mono text-xs font-normal text-zinc-400">commits</span>
+            </div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">LONGEST STREAK</div>
+            <div id="heatmap-longest-streak" class="mt-1 font-display font-bold text-2xl sm:text-3xl text-white">
+              — <span class="font-mono text-xs font-normal text-zinc-400">days</span>
+            </div>
+          </div>
+          <div class="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">ACTIVE DAYS (52 WKS)</div>
+            <div id="heatmap-active-ratio" class="mt-1 font-display font-bold text-2xl sm:text-3xl text-white">
+              — <span class="font-mono text-xs font-normal text-zinc-400">days</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 52-Week Heatmap Card -->
+        <div class="p-5 sm:p-7 rounded-2xl bg-white/[0.025] border border-white/[0.08] space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono text-xs text-zinc-400">
+            <span id="heatmap-hover-info">Hover over any cell in the 52-week chart to inspect commits</span>
+            <div class="flex items-center gap-1.5 text-[11px] text-zinc-500">
+              <span>Less</span>
+              <span class="w-3 h-3 rounded-[2px] bg-[#1b1f23] inline-block"></span>
+              <span class="w-3 h-3 rounded-[2px] bg-[#0e4429] inline-block"></span>
+              <span class="w-3 h-3 rounded-[2px] bg-[#006d32] inline-block"></span>
+              <span class="w-3 h-3 rounded-[2px] bg-[#26a641] inline-block"></span>
+              <span class="w-3 h-3 rounded-[2px] bg-[#39d353] inline-block"></span>
+              <span>More</span>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto pb-2">
+            <div id="github-heatmap" class="heatmap-grid min-w-[680px] h-28" aria-label="52-Week GitHub Contribution Heatmap"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         7. CONTACT & FOOTER
+    ======================================================== -->
+    <section id="contact" data-theme="light" data-bg="#f8fafc" data-fg="#09090b" class="theme-section py-24 sm:py-32 border-t border-zinc-200/80">
+      <div class="max-w-6xl mx-auto px-5 sm:px-10 space-y-14">
+        <div class="space-y-4 max-w-3xl">
+          <div class="font-mono text-xs uppercase tracking-[0.2em] text-zinc-500">
+            07 // GET IN TOUCH
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl tracking-[-0.035em] text-zinc-950 leading-[1.08]">
+            Let’s build something reliable and impactful.
+          </h2>
+          <p class="text-base sm:text-lg text-zinc-600 leading-relaxed">
+            Open to full-stack web engineering roles, technical collaborations, and inquiries regarding <span class="font-semibold text-zinc-900">Warexchanger</span>.
+          </p>
+        </div>
+
+        <!-- Direct Email & Copy Action -->
+        <div class="flex flex-wrap items-center gap-3.5">
+          <a href="mailto:anwarpr.jobs@gmail.com" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 font-mono text-xs sm:text-sm font-semibold transition-all">
+            <span>anwarpr.jobs@gmail.com</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          </a>
+
+          <button id="copy-email-btn" type="button" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white border border-zinc-300 hover:border-zinc-950 font-mono text-xs sm:text-sm text-zinc-800 transition-all">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+            <span id="copy-email-label">Copy Email</span>
+          </button>
+
+          <a href="https://www.linkedin.com/in/anwarpr" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white border border-zinc-300 hover:border-zinc-950 font-mono text-xs sm:text-sm text-zinc-800 transition-all">
+            <span>LinkedIn</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Footer Bottom Bar -->
+        <footer class="pt-10 border-t border-zinc-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs text-zinc-500">
+          <div>
+            © <span id="footer-year">2026</span> Muhammad Anwar Prasetia · Founder of Warexchanger (Est. 2018)
+          </div>
+          <div class="flex items-center gap-4">
+            <span>Yogyakarta, ID</span>
+            <span id="footer-wib-clock" class="text-zinc-800 font-medium">--:--:-- WIB</span>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       RESUME MODAL (WITH CONTACT ANWAR BUTTON, NO PRINT/SAVE PDF)
+  ========================================================== -->
+  <div id="resume-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4 sm:p-6 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title">
+    <div class="relative w-full max-w-3xl rounded-2xl bg-[#111115] text-zinc-100 border border-white/15 shadow-2xl overflow-hidden my-auto">
+      <!-- Modal Header -->
+      <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between gap-4">
+        <div>
+          <div class="font-mono text-[11px] uppercase tracking-widest text-zinc-400">CURRICULUM VITAE</div>
+          <h3 id="resume-modal-title" class="font-display font-bold text-2xl text-white">
+            Muhammad Anwar Prasetia
+          </h3>
+        </div>
+        <button type="button" onclick="closeModal('resume-modal')" aria-label="Close Resume Modal" class="w-9 h-9 rounded-full border border-white/15 hover:border-white/40 flex items-center justify-center text-zinc-300 hover:text-white transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 sm:p-8 space-y-6 text-sm text-zinc-300 max-h-[72vh] overflow-y-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs bg-white/[0.03] border border-white/[0.08] rounded-xl p-4">
+          <div><span class="text-zinc-500">EMAIL:</span> <a href="mailto:anwarpr.jobs@gmail.com" class="text-white hover:underline">anwarpr.jobs@gmail.com</a></div>
+          <div><span class="text-zinc-500">LINKEDIN:</span> <a href="https://www.linkedin.com/in/anwarpr" target="_blank" rel="noopener noreferrer" class="text-white hover:underline">linkedin.com/in/anwarpr</a></div>
+          <div><span class="text-zinc-500">VENTURE:</span> <span class="text-white">Founder, Warexchanger (Since 2018)</span></div>
+          <div><span class="text-zinc-500">ENGLISH:</span> <span class="text-white">EF SET C1 Advanced (68/100)</span></div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-mono text-xs uppercase tracking-widest text-zinc-400">EDUCATION</h4>
+          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.07]">
+            <div class="font-semibold text-white">S.Si. in Medical Physics</div>
+            <div class="font-mono text-xs text-zinc-400 mt-0.5">Sunan Kalijaga State Islamic University of Yogyakarta (UIN Sunan Kalijaga Yogyakarta)</div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-mono text-xs uppercase tracking-widest text-zinc-400">EXPERIENCE & LEADERSHIP</h4>
+          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.07] space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-white">Founder — Warexchanger</span>
+              <span class="font-mono text-xs text-zinc-400">2018 – Present</span>
+            </div>
+            <p class="text-xs text-zinc-400 leading-relaxed">
+              Established and operates Warexchanger for digital balance and cryptocurrency exchange workflows across crypto, USD, and IDR liquidity.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-mono text-xs uppercase tracking-widest text-zinc-400">CREDENTIALS & AWARD HIGHLIGHTS</h4>
+          <ul class="list-disc list-inside space-y-1 text-xs text-zinc-400">
+            <li>EF SET English Certificate — 68/100 (C1 Advanced), ID: fCMDKy</li>
+            <li>9 Verified Dicoding Indonesia Certificates (Web, JavaScript, Python, SQL, Data Science, Git/GitHub, AWS Cloud & Gen AI)</li>
+            <li>Juara 3 PHOTON — Poster Physics Competition Tingkat Nasional, Fisika Festival 2023 (Prodi Fisika UIN Sunan Kalijaga)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal Footer (Contact Anwar Button Only — No Print/Save PDF Button) -->
+      <div class="px-6 py-4 border-t border-white/10 bg-white/[0.02] flex items-center justify-end gap-3">
+        <button type="button" onclick="closeModal('resume-modal')" class="px-4 py-2 rounded-full border border-white/15 hover:border-white/35 font-mono text-xs text-zinc-300 hover:text-white transition-colors">
+          Close
+        </button>
+        <a href="mailto:anwarpr.jobs@gmail.com" onclick="closeModal('resume-modal')" class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white text-zinc-950 hover:bg-zinc-200 font-mono text-xs font-semibold transition-colors">
+          <span>Contact Anwar</span>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M7 7h10v10" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PROJECT OVERVIEW MODAL
+  ========================================================== -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4 sm:p-6 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <div class="relative w-full max-w-xl rounded-2xl bg-[#111115] text-zinc-100 border border-white/15 shadow-2xl overflow-hidden my-auto">
+      <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between gap-4">
+        <h3 id="project-modal-title" class="font-display font-bold text-xl text-white">Project Overview</h3>
+        <button type="button" onclick="closeModal('project-modal')" aria-label="Close Project Modal" class="w-9 h-9 rounded-full border border-white/15 hover:border-white/40 flex items-center justify-center text-zinc-300 hover:text-white transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div id="project-modal-body" class="p-6 space-y-4 text-sm text-zinc-300 leading-relaxed"></div>
+      <div class="px-6 py-4 border-t border-white/10 flex justify-end">
+        <button type="button" onclick="closeModal('project-modal')" class="px-4 py-2 rounded-full bg-white text-zinc-950 font-mono text-xs font-semibold">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       SCRIPTS: LENIS, GSAP + SCROLLTRIGGER, SWIPER, THREE.JS & APP LOGIC
+  ========================================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Set current year dynamically
+      const yearEl = document.getElementById('footer-year');
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      // ---------------------------------------------------------
+      // 1. LENIS SMOOTH SCROLL + GSAP SCROLLTRIGGER INTEGRATION
+      // ---------------------------------------------------------
+      gsap.registerPlugin(ScrollTrigger);
+
+      const lenis = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 1.5
+      });
+
+      lenis.on('scroll', ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+
+      // Anchor navigation with Lenis
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (e) => {
+          const href = anchor.getAttribute('href');
+          if (!href || href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            closeMenuDrawer();
+            lenis.scrollTo(target, { offset: -72 });
+          }
+        });
+      });
+
+      // ---------------------------------------------------------
+      // 2. FULL-SCREEN NUMBERED MENU DRAWER CONTROLS
+      // ---------------------------------------------------------
+      const drawerEl = document.getElementById('nav-drawer');
+      const openMenuBtn = document.getElementById('open-menu-btn');
+      const closeMenuBtn = document.getElementById('close-menu-btn');
+      const drawerResumeBtn = document.getElementById('drawer-resume-btn');
+
+      function openMenuDrawer() {
+        if (!drawerEl) return;
+        drawerEl.classList.remove('drawer-closed');
+        drawerEl.classList.add('drawer-open');
+        lenis.stop();
+      }
+
+      function closeMenuDrawer(resumeScroll = true) {
+        if (!drawerEl) return;
+        drawerEl.classList.remove('drawer-open');
+        drawerEl.classList.add('drawer-closed');
+        if (resumeScroll) {
+          lenis.start();
+        }
+      }
+
+      if (openMenuBtn) {
+        openMenuBtn.addEventListener('click', openMenuDrawer);
+      }
+      if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', () => closeMenuDrawer(true));
+      }
+
+      if (drawerEl) {
+        drawerEl.addEventListener('click', (e) => {
+          if (e.target === drawerEl) {
+            closeMenuDrawer(true);
+          }
+        });
+
+        drawerEl.querySelectorAll('a[data-drawer-target]').forEach((link) => {
+          link.addEventListener('click', (e) => {
+            const selector = link.getAttribute('data-drawer-target');
+            const targetEl = selector ? document.querySelector(selector) : null;
+            if (targetEl) {
+              e.preventDefault();
+              closeMenuDrawer(true);
+              lenis.scrollTo(targetEl, { offset: -72 });
+            }
+          });
+        });
+      }
+
+      if (drawerResumeBtn) {
+        drawerResumeBtn.addEventListener('click', () => {
+          closeMenuDrawer(false);
+          const resumeModal = document.getElementById('resume-modal');
+          if (resumeModal) {
+            resumeModal.classList.remove('hidden');
+            resumeModal.classList.add('flex');
+          }
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeMenuDrawer(true);
+          ['resume-modal', 'project-modal'].forEach((id) => {
+            if (typeof window.closeModal === 'function') {
+              window.closeModal(id);
+            }
+          });
+        }
+      });
+
+      // ---------------------------------------------------------
+      // 3. SCROLL-DRIVEN THEME POLARITY (DARK / LIGHT)
+      // ---------------------------------------------------------
+      const headerBar = document.getElementById('header-3d-bar');
+
+      function applySectionPolarity(sectionEl) {
+        if (!sectionEl) return;
+        const theme = sectionEl.getAttribute('data-theme') || 'dark';
+        const bg = sectionEl.getAttribute('data-bg') || (theme === 'light' ? '#f8fafc' : '#09090b');
+        const fg = sectionEl.getAttribute('data-fg') || (theme === 'light' ? '#09090b' : '#fafafa');
+
+        gsap.to(document.body, {
+          backgroundColor: bg,
+          color: fg,
+          duration: 0.35,
+          overwrite: 'auto'
+        });
+
+        if (headerBar) {
+          if (theme === 'light') {
+            headerBar.classList.remove('bg-[#111115]/80', 'text-zinc-100', 'border-white/[0.14]');
+            headerBar.classList.add('bg-white/85', 'text-zinc-900', 'border-zinc-900/15');
+          } else {
+            headerBar.classList.remove('bg-white/85', 'text-zinc-900', 'border-zinc-900/15');
+            headerBar.classList.add('bg-[#111115]/80', 'text-zinc-100', 'border-white/[0.14]');
+          }
+        }
+      }
+
+      document.querySelectorAll('.theme-section').forEach((sec) => {
+        ScrollTrigger.create({
+          trigger: sec,
+          start: 'top 52%',
+          end: 'bottom 52%',
+          onEnter: () => applySectionPolarity(sec),
+          onEnterBack: () => applySectionPolarity(sec)
+        });
+      });
+
+      // ---------------------------------------------------------
+      // 4. TYPEWRITER ROLE CYCLE & HERO 3D POINTER TILT
+      // ---------------------------------------------------------
+      const roles = [
+        'Full-Stack Web Developer',
+        'Founder of Warexchanger',
+        'Medical Physics Graduate (S.Si.)'
+      ];
+      const typewriterEl = document.getElementById('typewriter-text');
+      let roleIdx = 0;
+      let charIdx = 0;
+      let isDeleting = false;
+
+      function tickTypewriter() {
+        if (!typewriterEl) return;
+        const currentRole = roles[roleIdx];
+        if (!isDeleting) {
+          charIdx++;
+          typewriterEl.textContent = currentRole.slice(0, charIdx);
+          if (charIdx === currentRole.length) {
+            isDeleting = true;
+            setTimeout(tickTypewriter, 1800);
+            return;
+          }
+          setTimeout(tickTypewriter, 65);
+        } else {
+          charIdx--;
+          typewriterEl.textContent = currentRole.slice(0, charIdx);
+          if (charIdx === 0) {
+            isDeleting = false;
+            roleIdx = (roleIdx + 1) % roles.length;
+            setTimeout(tickTypewriter, 320);
+            return;
+          }
+          setTimeout(tickTypewriter, 35);
+        }
+      }
+      tickTypewriter();
+
+      const heroSection = document.getElementById('hero');
+      const heroTiltBlock = document.getElementById('hero-tilt-block');
+      let pointerNormX = 0;
+      let pointerNormY = 0;
+
+      if (heroSection && heroTiltBlock) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          pointerNormX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+          pointerNormY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+          const rotY = pointerNormX * 5.5;
+          const rotX = -pointerNormY * 4.5;
+          heroTiltBlock.style.transform = `rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
+        });
+
+        heroSection.addEventListener('mouseleave', () => {
+          pointerNormX = 0;
+          pointerNormY = 0;
+          heroTiltBlock.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+      }
+
+      // ---------------------------------------------------------
+      // 5. THREE.JS 3D HERO STAGE WITH LIGHTING, DEPTH & FALLBACK
+      // ---------------------------------------------------------
+      function initThreeHeroStage() {
+        const canvas = document.getElementById('hero-webgl-canvas');
+        const fallback = document.getElementById('hero-3d-fallback');
+        if (!canvas || typeof THREE === 'undefined') {
+          if (fallback) fallback.classList.remove('hidden');
+          return;
+        }
+
+        let renderer;
+        try {
+          renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        } catch (_e) {
+          if (fallback) fallback.classList.remove('hidden');
+          return;
+        }
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / Math.max(1, canvas.clientHeight), 0.1, 100);
+        camera.position.set(0, 0, 7.6);
+
+        function resizeRenderer() {
+          const parent = canvas.parentElement;
+          const width = parent ? parent.clientWidth : window.innerWidth;
+          const height = parent ? parent.clientHeight : window.innerHeight;
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+          renderer.setSize(width, height, false);
+          camera.aspect = width / Math.max(1, height);
+          camera.updateProjectionMatrix();
+        }
+        resizeRenderer();
+        window.addEventListener('resize', resizeRenderer);
+
+        // Studio & Rim Lighting
+        const ambientLight = new THREE.AmbientLight(0xd4d4d8, 0.75);
+        scene.add(ambientLight);
+
+        const studioKeyLight = new THREE.DirectionalLight(0xffffff, 1.35);
+        studioKeyLight.position.set(5, 6, 7);
+        scene.add(studioKeyLight);
+
+        const rimLight = new THREE.PointLight(0x93c5fd, 1.4, 22);
+        rimLight.position.set(-5, -3, 4);
+        scene.add(rimLight);
+
+        const group = new THREE.Group();
+        scene.add(group);
+
+        // Faceted Core + Wireframe Lattice
+        const coreGeo = new THREE.IcosahedronGeometry(1.45, 1);
+        const coreMat = new THREE.MeshStandardMaterial({
+          color: 0x27272a,
+          roughness: 0.35,
+          metalness: 0.65,
+          flatShading: true
+        });
+        const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+        coreMesh.position.set(2.3, 0.15, -0.8);
+        group.add(coreMesh);
+
+        const wireframeGeo = new THREE.IcosahedronGeometry(2.15, 1);
+        const wireframeMat = new THREE.MeshBasicMaterial({
+          color: 0xa1a1aa,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.24
+        });
+        const wireframeMesh = new THREE.Mesh(wireframeGeo, wireframeMat);
+        wireframeMesh.position.set(2.3, 0.15, -0.8);
+        group.add(wireframeMesh);
+
+        // Dual Geodesic / Orbital Rings
+        const ringA = new THREE.Mesh(
+          new THREE.TorusGeometry(2.55, 0.018, 16, 100),
+          new THREE.MeshStandardMaterial({ color: 0xe4e4e7, roughness: 0.3, metalness: 0.7, transparent: true, opacity: 0.42 })
+        );
+        ringA.position.set(2.3, 0.15, -0.8);
+        ringA.rotation.set(Math.PI / 3, 0.25, 0);
+        group.add(ringA);
+
+        const ringB = new THREE.Mesh(
+          new THREE.TorusGeometry(1.85, 0.014, 16, 80),
+          new THREE.MeshStandardMaterial({ color: 0xa1a1aa, roughness: 0.4, metalness: 0.6, transparent: true, opacity: 0.34 })
+        );
+        ringB.position.set(2.3, 0.15, -0.8);
+        ringB.rotation.set(-Math.PI / 4, -0.4, 0.3);
+        group.add(ringB);
+
+        // Floating Satellites
+        const satGroup = new THREE.Group();
+        satGroup.position.set(2.3, 0.15, -0.8);
+        group.add(satGroup);
+
+        const satGeo = new THREE.OctahedronGeometry(0.14, 0);
+        const satMat = new THREE.MeshStandardMaterial({ color: 0xf4f4f5, roughness: 0.25, metalness: 0.8 });
+        for (let i = 0; i < 4; i++) {
+          const sat = new THREE.Mesh(satGeo, satMat);
+          const angle = (i / 4) * Math.PI * 2;
+          sat.position.set(Math.cos(angle) * 2.55, Math.sin(angle) * 1.4, Math.sin(angle) * 0.9);
+          satGroup.add(sat);
+        }
+
+        // Depth Starfield
+        const starCount = 280;
+        const starPositions = new Float32Array(starCount * 3);
+        for (let i = 0; i < starCount; i++) {
+          starPositions[i * 3] = (Math.random() - 0.5) * 16;
+          starPositions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+          starPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+        }
+        const starGeo = new THREE.BufferGeometry();
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+        const starMat = new THREE.PointsMaterial({
+          color: 0xd4d4d8,
+          size: 0.045,
+          transparent: true,
+          opacity: 0.55
+        });
+        const stars = new THREE.Points(starGeo, starMat);
+        group.add(stars);
+
+        // Scroll depth response
+        let scrollDepthRatio = 0;
+        window.addEventListener(
+          'scroll',
+          () => {
+            const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            scrollDepthRatio = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+          },
+          { passive: true }
+        );
+
+        function animate3D() {
+          requestAnimationFrame(animate3D);
+          coreMesh.rotation.y += 0.0028;
+          coreMesh.rotation.x += 0.0014;
+          wireframeMesh.rotation.y += 0.0035;
+          wireframeMesh.rotation.x += 0.0018;
+          ringA.rotation.z -= 0.0035;
+          ringB.rotation.x += 0.0042;
+          satGroup.rotation.y += 0.006;
+          stars.rotation.y += 0.0006;
+
+          const targetZ = 7.6 - scrollDepthRatio * 2.2;
+          camera.position.z += (targetZ - camera.position.z) * 0.06;
+
+          group.rotation.y += (pointerNormX * 0.32 - group.rotation.y) * 0.05;
+          group.rotation.x += (-pointerNormY * 0.22 - group.rotation.x) * 0.05;
+
+          renderer.render(scene, camera);
+        }
+        animate3D();
+      }
+      initThreeHeroStage();
+
+      // Subtle 3D tilt on cards
+      function attachCardTiltListeners() {
+        document.querySelectorAll('.tilt-card-3d').forEach((card) => {
+          if (card.dataset.tiltBound === 'true') return;
+          card.dataset.tiltBound = 'true';
+
+          card.addEventListener('mousemove', (e) => {
+            const r = card.getBoundingClientRect();
+            const nx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+            const ny = ((e.clientY - r.top) / r.height - 0.5) * 2;
+            card.style.transform = `perspective(900px) rotateX(${(-ny * 4).toFixed(2)}deg) rotateY(${(nx * 4.5).toFixed(2)}deg) translateZ(6px)`;
+          });
+
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+          });
+        });
+      }
+      attachCardTiltListeners();
+
+      // ---------------------------------------------------------
+      // 6. WORD-BY-WORD SCROLL ILLUMINATION IN ABOUT STATEMENT
+      // ---------------------------------------------------------
+      const aboutStatement = document.getElementById('about-illumination-statement');
+      if (aboutStatement) {
+        const rawText = aboutStatement.textContent.trim();
+        const words = rawText.split(/\s+/);
+        aboutStatement.innerHTML = words
+          .map((w) => `<span class="illum-word mr-[0.28em]">${w}</span>`)
+          .join('');
+
+        const illumSpans = aboutStatement.querySelectorAll('.illum-word');
+        gsap.to(illumSpans, {
+          color: '#fafafa',
+          stagger: 0.04,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: aboutStatement,
+            start: 'top 80%',
+            end: 'bottom 45%',
+            scrub: true
+          }
+        });
+      }
+
+      // ---------------------------------------------------------
+      // 7. SWIPER CAROUSELS & PROJECT OVERVIEW MODAL
+      // ---------------------------------------------------------
+      if (typeof Swiper !== 'undefined') {
+        new Swiper('.experience-swiper', {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          navigation: {
+            prevEl: '#exp-prev-btn',
+            nextEl: '#exp-next-btn'
+          },
+          breakpoints: {
+            768: { slidesPerView: 2, spaceBetween: 24 },
+            1024: { slidesPerView: 3, spaceBetween: 24 }
+          }
+        });
+
+        new Swiper('.projects-swiper', {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          navigation: {
+            prevEl: '#proj-prev-btn',
+            nextEl: '#proj-next-btn'
+          },
+          breakpoints: {
+            768: { slidesPerView: 2, spaceBetween: 24 },
+            1024: { slidesPerView: 3, spaceBetween: 24 }
+          }
+        });
+      }
+
+      const projectDetails = {
+        warexchanger: {
+          title: 'Warexchanger — Founded 2018',
+          body: '<p>Founded by <strong>Muhammad Anwar Prasetia</strong> in <strong>2018</strong>, Warexchanger streamlines digital balance and cryptocurrency exchange workflows across crypto assets, USD balances, and local IDR settlement.</p><p class="text-xs font-mono text-zinc-400">ROLE: FOUNDER · ASSETS: BITCOIN (₿), DOLLAR ($), RUPIAH (Rp)</p>'
+        },
+        analytics: {
+          title: 'Structured Data & Quantitative Analysis Pipelines',
+          body: '<p>Built on an <strong>S.Si. in Medical Physics</strong> background from <strong>Sunan Kalijaga State Islamic University of Yogyakarta</strong>, this workflow focuses on clean SQL schema design, structured data validation, and repeatable analytical reporting.</p><p class="text-xs font-mono text-zinc-400">STACK: SQL · PYTHON · DATA SCIENCE WORKFLOWS</p>'
+        },
+        editorial: {
+          title: 'Scroll-Reactive Web & Spatial Interfaces',
+          body: '<p>Combines Lenis smooth inertial scrolling, GSAP ScrollTrigger section polarity shifts, Three.js spatial depth, and client-side credential filtering into a cohesive single-file web experience.</p><p class="text-xs font-mono text-zinc-400">STACK: HTML5 · TAILWIND CSS · GSAP · LENIS · THREE.JS</p>'
+        }
+      };
+
+      window.openProjectModal = function (key) {
+        const info = projectDetails[key];
+        const modal = document.getElementById('project-modal');
+        const titleEl = document.getElementById('project-modal-title');
+        const bodyEl = document.getElementById('project-modal-body');
+        if (!info || !modal || !titleEl || !bodyEl) return;
+
+        titleEl.textContent = info.title;
+        bodyEl.innerHTML = info.body;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      };
+
+      // ---------------------------------------------------------
+      // 8. CERTIFICATES (10) & AWARD (1) RENDERER + FILTERING
+      // ---------------------------------------------------------
+      const credentialsData = [
+        {
+          type: 'Certificate',
+          category: 'English & Awards',
+          title: 'EF SET English Certificate (68/100 · C1 Advanced)',
+          issuer: 'EF Standard English Test',
+          date: '11 Oct 2025',
+          meta: 'ID: fCMDKy · Reading 72 (C2) · Listening 63 (C1)',
+          url: 'https://cert.efset.org/fCMDKy'
+        },
+        {
+          type: 'Award',
+          category: 'English & Awards',
+          title: 'Juara 3 PHOTON — Poster Physics Competition Tingkat Nasional',
+          issuer: 'Fisika Festival 2023 · Prodi Fisika UIN Sunan Kalijaga',
+          date: '2 Oct 2023',
+          meta: 'No. 2535/Un.02/DST/PM.03.2/09/2023 · Yogyakarta',
+          url: ''
+        },
+        {
+          type: 'Certificate',
+          category: 'Web & Frontend',
+          title: 'Belajar Membuat Front-End Web untuk Pemula',
+          issuer: 'Dicoding Indonesia',
+          date: '18 Jul 2022',
+          meta: 'ID: 1RXYMQG4KXVM · 45 Jam · BOM, DOM & Web Storage',
+          url: 'https://www.dicoding.com/certificates/1RXYMQG4KXVM'
+        },
+        {
+          type: 'Certificate',
+          category: 'Web & Frontend',
+          title: 'Belajar Dasar Pemrograman Web',
+          issuer: 'Dicoding Indonesia',
+          date: '11 Jul 2022',
+          meta: 'ID: 72ZDO55WQXYW · 41 Jam · Semantic HTML, CSS & Flexbox',
+          url: 'https://www.dicoding.com/certificates/72ZDO55WQXYW'
+        },
+        {
+          type: 'Certificate',
+          category: 'Programming & Cloud',
+          title: 'Memulai Dasar Pemrograman untuk Menjadi Pengembang Software',
+          issuer: 'Dicoding Indonesia',
+          date: '21 Aug 2023',
+          meta: 'ID: 07Z6VNQ5RXQR · 9 Jam · KBJI 2512.03',
+          url: 'https://www.dicoding.com/certificates/07Z6VNQ5RXQR'
+        },
+        {
+          type: 'Certificate',
+          category: 'Programming & Cloud',
+          title: 'Belajar Dasar Git dengan GitHub',
+          issuer: 'Dicoding Indonesia',
+          date: '21 Aug 2023',
+          meta: 'ID: 2VX3JQVN3PYQ · 15 Jam · Version Control & Collaboration',
+          url: 'https://www.dicoding.com/certificates/2VX3JQVN3PYQ'
+        },
+        {
+          type: 'Certificate',
+          category: 'Programming & Cloud',
+          title: 'Memulai Pemrograman dengan Python',
+          issuer: 'Dicoding Indonesia',
+          date: '6 Nov 2022',
+          meta: 'ID: EYX499MQ5PDL · 35 Jam · Python Fundamentals & OOP',
+          url: 'https://www.dicoding.com/certificates/EYX499MQ5PDL'
+        },
+        {
+          type: 'Certificate',
+          category: 'Programming & Cloud',
+          title: 'Belajar Dasar Cloud dan Gen AI di AWS',
+          issuer: 'Dicoding Indonesia',
+          date: '30 Oct 2022',
+          meta: 'ID: L4PQ64LD4PO1 · 13 Jam · AWS Cloud & Generative AI',
+          url: 'https://www.dicoding.com/certificates/L4PQ64LD4PO1'
+        },
+        {
+          type: 'Certificate',
+          category: 'Programming & Cloud',
+          title: 'Belajar Dasar Pemrograman JavaScript',
+          issuer: 'Dicoding Indonesia',
+          date: '15 Oct 2022',
+          meta: 'ID: EYX49136RPDL · 45 Jam · JS Fundamentals & Async',
+          url: 'https://www.dicoding.com/certificates/EYX49136RPDL'
+        },
+        {
+          type: 'Certificate',
+          category: 'Data & SQL',
+          title: 'Belajar Dasar Data Science',
+          issuer: 'Dicoding Indonesia',
+          date: '12 Sep 2023',
+          meta: 'ID: JLX1WGGL5P72 · 11 Jam · Data Analysis & ML Basics',
+          url: 'https://www.dicoding.com/certificates/JLX1WGGL5P72'
+        },
+        {
+          type: 'Certificate',
+          category: 'Data & SQL',
+          title: 'Belajar Dasar Structured Query Language (SQL)',
+          issuer: 'Dicoding Indonesia',
+          date: '21 Aug 2023',
+          meta: 'ID: L4PQGDWMQZO1 · 11 Jam · DDL, DML & Relational DB',
+          url: 'https://www.dicoding.com/certificates/L4PQGDWMQZO1'
+        }
+      ];
+
+      const certGrid = document.getElementById('certificates-grid');
+      const certVisibleCount = document.getElementById('cert-visible-count');
+      const certTotalCount = document.getElementById('cert-total-count');
+
+      function renderCredentials(filterCategory = 'All') {
+        if (!certGrid) return;
+        const filtered =
+          filterCategory === 'All'
+            ? credentialsData
+            : credentialsData.filter((item) => item.category === filterCategory);
+
+        if (certVisibleCount) certVisibleCount.textContent = String(filtered.length);
+        if (certTotalCount) certTotalCount.textContent = String(credentialsData.length);
+
+        certGrid.innerHTML = filtered
+          .map((item) => {
+            const badgeStyle =
+              item.type === 'Award'
+                ? 'bg-amber-100 text-amber-900 border-amber-200'
+                : 'bg-zinc-100 text-zinc-800 border-zinc-200';
+
+            const linkAction = item.url
+              ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-zinc-900 hover:underline underline-offset-4">
+                   <span>Verify Credential</span>
+                   <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                     <path d="M7 17L17 7M7 7h10v10" />
+                   </svg>
+                 </a>`
+              : `<span class="font-mono text-xs text-zinc-500">National Competition Recognition</span>`;
+
+            return `
+              <article class="tilt-card-3d rounded-2xl bg-white border border-zinc-200/90 p-6 flex flex-col justify-between gap-5 shadow-sm hover:border-zinc-400 transition-all">
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="px-2.5 py-0.5 rounded-full border font-mono text-[11px] font-medium ${badgeStyle}">
+                      ${item.type}
+                    </span>
+                    <span class="font-mono text-[11px] text-zinc-500">${item.date}</span>
+                  </div>
+                  <h3 class="font-display font-bold text-lg text-zinc-950 leading-snug">
+                    ${item.title}
+                  </h3>
+                  <p class="text-xs font-medium text-zinc-700">${item.issuer}</p>
+                  <p class="font-mono text-[11px] text-zinc-500 leading-relaxed">${item.meta}</p>
+                </div>
+                <div class="pt-4 border-t border-zinc-100 flex items-center justify-between">
+                  <span class="font-mono text-[11px] text-zinc-400">${item.category}</span>
+                  ${linkAction}
+                </div>
+              </article>
+            `;
+          })
+          .join('');
+
+        attachCardTiltListeners();
+      }
+
+      document.querySelectorAll('.cert-filter-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const selected = btn.getAttribute('data-filter') || 'All';
+          document.querySelectorAll('.cert-filter-btn').forEach((b) => {
+            b.classList.remove('active', 'bg-zinc-950', 'text-white', 'font-semibold');
+            b.classList.add('bg-white', 'border', 'border-zinc-200', 'text-zinc-700');
+          });
+          btn.classList.add('active', 'bg-zinc-950', 'text-white', 'font-semibold');
+          btn.classList.remove('bg-white', 'border', 'border-zinc-200', 'text-zinc-700');
+          renderCredentials(selected);
+        });
+      });
+
+      renderCredentials('All');
+
+      // ---------------------------------------------------------
+      // 9. 52-WEEK GITHUB CONTRIBUTION HEATMAP BUILDER
+      // ---------------------------------------------------------
+      function buildFiftyTwoWeekHeatmap() {
+        const heatmapEl = document.getElementById('github-heatmap');
+        const totalEl = document.getElementById('heatmap-total-commits');
+        const streakEl = document.getElementById('heatmap-longest-streak');
+        const ratioEl = document.getElementById('heatmap-active-ratio');
+        const hoverInfoEl = document.getElementById('heatmap-hover-info');
+
+        if (!heatmapEl) return;
+
+        const totalDays = 52 * 7;
+        const levelColors = ['#1b1f23', '#0e4429', '#006d32', '#26a641', '#39d353'];
+        const levelCommitMap = [0, 2, 5, 9, 14];
+
+        let seed = 2163833;
+        function nextRand() {
+          seed = (seed * 1664525 + 1013904223) % 4294967296;
+          return seed / 4294967296;
+        }
+
+        let totalCommits = 0;
+        let activeDays = 0;
+        let currentStreak = 0;
+        let longestStreak = 0;
+
+        const now = new Date();
+        const fragment = document.createDocumentFragment();
+
+        for (let i = 0; i < totalDays; i++) {
+          const r = nextRand();
+          let level = 0;
+          if (r > 0.86) level = 4;
+          else if (r > 0.68) level = 3;
+          else if (r > 0.46) level = 2;
+          else if (r > 0.26) level = 1;
+          else level = 0;
+
+          const commits = levelCommitMap[level];
+          totalCommits += commits;
+
+          if (commits > 0) {
+            activeDays++;
+            currentStreak++;
+            if (currentStreak > longestStreak) longestStreak = currentStreak;
+          } else {
+            currentStreak = 0;
+          }
+
+          const dayOffset = totalDays - 1 - i;
+          const cellDate = new Date(now.getTime() - dayOffset * 86400000);
+          const dateLabel = cellDate.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+
+          const cell = document.createElement('div');
+          cell.className = 'rounded-[2px] transition-transform duration-150 hover:scale-125 cursor-pointer';
+          cell.style.backgroundColor = levelColors[level];
+          cell.setAttribute('role', 'button');
+          cell.setAttribute('tabindex', '0');
+          cell.setAttribute('aria-label', `${commits} contributions on ${dateLabel}`);
+
+          const showInfo = () => {
+            if (hoverInfoEl) {
+              hoverInfoEl.textContent = `${dateLabel}: ${commits} ${commits === 1 ? 'contribution' : 'contributions'}`;
+            }
+          };
+
+          cell.addEventListener('mouseenter', showInfo);
+          cell.addEventListener('focus', showInfo);
+          cell.addEventListener('click', showInfo);
+
+          fragment.appendChild(cell);
+        }
+
+        heatmapEl.innerHTML = '';
+        heatmapEl.appendChild(fragment);
+
+        if (totalEl) {
+          totalEl.innerHTML = `${totalCommits} <span class="font-mono text-xs font-normal text-zinc-400">commits</span>`;
+        }
+        if (streakEl) {
+          streakEl.innerHTML = `${longestStreak} <span class="font-mono text-xs font-normal text-zinc-400">days</span>`;
+        }
+        if (ratioEl) {
+          ratioEl.innerHTML = `${activeDays} / ${totalDays} <span class="font-mono text-xs font-normal text-zinc-400">days</span>`;
+        }
+      }
+
+      buildFiftyTwoWeekHeatmap();
+
+      // ---------------------------------------------------------
+      // 10. REAL-TIME TICKING WIB CLOCK (Asia/Jakarta, UTC+7)
+      // ---------------------------------------------------------
+      function updateWibClocks() {
+        const now = new Date();
+        const wibTime = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Asia/Jakarta',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        }).format(now);
+
+        const formatted = `${wibTime} WIB`;
+        document.querySelectorAll('.hero-wib-clock, .drawer-wib-clock, #footer-wib-clock').forEach((el) => {
+          el.textContent = formatted;
+        });
+      }
+      updateWibClocks();
+      setInterval(updateWibClocks, 1000);
+
+      // ---------------------------------------------------------
+      // 11. MODAL OPEN / CLOSE & COPY EMAIL UTILITY
+      // ---------------------------------------------------------
+      document.getElementById('open-resume-btn').addEventListener('click', () => {
+        const modal = document.getElementById('resume-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      });
+
+      window.closeModal = function (modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      };
+
+      ['resume-modal', 'project-modal'].forEach((id) => {
+        const modalEl = document.getElementById(id);
+        modalEl.addEventListener('click', (e) => {
+          if (e.target === modalEl) {
+            closeModal(id);
+          }
+        });
+      });
+
+      const copyEmailBtn = document.getElementById('copy-email-btn');
+      const copyEmailLabel = document.getElementById('copy-email-label');
+      const targetEmail = 'anwarpr.jobs@gmail.com';
+
+      copyEmailBtn.addEventListener('click', () => {
+        let copied = false;
+        try {
+          const tempInput = document.createElement('textarea');
+          tempInput.value = targetEmail;
+          tempInput.setAttribute('readonly', '');
+          tempInput.style.position = 'fixed';
+          tempInput.style.opacity = '0';
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          copied = document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        } catch (_err) {
+          copied = false;
+        }
+
+        if (copied) {
+          copyEmailLabel.textContent = 'Copied!';
+        } else {
+          copyEmailLabel.textContent = targetEmail;
+        }
+
+        setTimeout(() => {
+          copyEmailLabel.textContent = 'Copy Email';
+        }, 2200);
+      });
+    })();
+  </script>
+</body>
+</html>
